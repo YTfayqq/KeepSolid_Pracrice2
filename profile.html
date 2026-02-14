@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Владислав Черненко">
+    <meta name="description" content="BookStream - профіль користувача: перегляньте ваші дані та обрані книги.">
+    <title>BookStream - Профіль</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-content">
+        <div class="header-left">
+            <a href="index.html" class="logo">BookStream</a>
+        </div>
+
+        <div class="header-center">
+            <div class="search-wrapper">
+                <input type="text" id="search-input" class="search-bar" placeholder="Пошук книг...">
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-toggle">☀</button>
+            <a href="profile.html" id="auth-btn" class="btn btn-secondary auth-btn">Профіль</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-header">
+                <h1>Ваш профіль</h1>
+                <div class="profile-info">
+                    <!-- Динамічно вставляється JS -->
+                </div>
+            </div>
+            
+            <h2 class="section-title">Обрані книги</h2>
+            
+            <div class="books-grid" id="favorites-container">
+                <!-- Тут будуть рендеритися обрані книги -->
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 BookStream. Всі права захищені.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
