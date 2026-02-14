@@ -402,68 +402,88 @@ body {
     margin-bottom: 20px;
 }
 
-/* Адаптація для мобільних пристроїв: медіа-запити для екранів до 768px */
+
+/* Для планшетів та мобільних (менше 768px) */
 @media (max-width: 768px) {
-    body {
-        padding-top: 70px;
+    /* 1. Робимо кнопку "Профіль" компактною (прибираємо текст, залишаємо іконку) */
+    .auth-btn {
+        font-size: 0 !important; /* Ховаємо текст "Профіль" */
+        padding: 0 !important;
+        width: 40px;
+        height: 40px;
+        min-width: 40px !important;
+        border-radius: 50%; /* Робимо круглою */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .hero h1 {
-        font-size: 32px;
+    /* Додаємо іконку через CSS (щоб не міняти HTML) */
+    .auth-btn::after {
+        content: '\1F464'; /* Юнікод іконка людини (👤) */
+        font-size: 20px;
+        color: var(--text-main);
+    }
+    
+    .auth-btn:hover::after {
+        color: var(--danger-color); /* Колір при наведенні, якщо активна */
     }
 
-    .hero p {
-        font-size: 16px;
+    /* Зменшуємо відступи між елементами справа */
+    .header-right {
+        gap: 10px;
+    }
+}
+
+/* Для телефонів (менше 576px) - ПЕРЕНОС ПОШУКУ */
+@media (max-width: 576px) {
+    /* 1. Знімаємо фіксовану висоту хедера, щоб він міг розтягнутися */
+    .header {
+        height: auto;
+        padding: 10px 0;
+        flex-wrap: wrap; /* Дозволяємо перенос елементів */
     }
 
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 20px;
-    }
-
-    .book-detail-wrapper {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        text-align: center;
-    }
-
-    .cover-container {
-        position: static;
-    }
-
-    .cover-wrapper {
-        max-width: 250px;
-        margin: 0 auto 20px;
-    }
-
-    .action-row {
-        flex-direction: column;
+    /* 2. Змінюємо сітку на Flexbox з переносом */
+    .header-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
         gap: 10px;
     }
 
-    .btn {
-        width: 100%;
-        min-width: 100% !important;
+    /* 3. Логотип зліва */
+    .header-left {
+        order: 1;
+        flex: 0 0 auto; /* Не стискається */
     }
 
-    .header-left .nav {
-        display: none;
+    /* 4. Кнопки справа */
+    .header-right {
+        order: 2;
+        flex: 0 0 auto;
     }
-    
-    .profile-header h1 {
-        font-size: 28px;
-    }
-    
-    .profile-info {
-        width: 100%;
+
+    /* 5. Пошук переносимо на новий рядок і розтягуємо */
+    .header-center {
+        order: 3;
+        width: 100%; /* Займає всю ширину */
+        margin-top: 5px;
     }
 
     .search-wrapper {
-        max-width: 300px;
+        max-width: 100%; /* Пошук на всю ширину */
     }
 
-    .container {
-        padding: 0 15px;
+    /* 6. Оскільки хедер став вищим (два рядки), опускаємо контент сторінки */
+    body {
+        padding-top: 130px; /* 70px (верх) + 50px (пошук) + відступи */
+    }
+    
+    /* Додатково: трохи зменшити шрифт логотипу */
+    .logo {
+        font-size: 20px;
     }
 }
 
@@ -471,7 +491,32 @@ body {
 @media (max-width: 480px) {
     .header-content {
         grid-template-columns: auto 1fr auto;
+        gap: 8px;
     }
+    
+    .header-left, .header-right {
+        gap: 8px;
+    }
+    
+    .logo {
+        font-size: 18px;
+    }
+    
+    .search-wrapper {
+        max-width: none;
+    }
+    
+    .search-bar {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .theme-toggle {
+        padding: 6px 10px;
+        min-width: 35px;
+        font-size: 12px;
+    }
+    
     .header-right .btn {
         padding: 8px 12px;
         font-size: 12px;
@@ -537,7 +582,8 @@ body {
 }
 
 /* Анімація зникнення: ключові кадри для анімації видалення картки */
-.book-card.removing {
+.book-card.removing,
+.book-detail-wrapper.removing {
     animation: bookFadeOut 0.45s ease forwards;
     pointer-events: none;
 }
@@ -548,11 +594,17 @@ body {
     100% { opacity: 0; transform: scale(0.92) translateY(-20px); }
 }
 
-.book-detail-wrapper.removing {
-    animation: bookFadeOut 0.45s ease forwards;
-}
-
 .book-card {
     transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 1;
+}
+
+@keyframes button-pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.btn-anim {
+    animation: button-pop 0.3s ease-out;
 }

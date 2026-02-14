@@ -274,12 +274,27 @@ async function loadBookDetails() {
 
 // Обробник перемикання обраного на сторінці деталей
 window.toggleFavDetail = function(btn, bookId) {
+    // 1. Виконуємо логіку збереження/видалення в LocalStorage
     const isFav = toggleFavorite(bookId);
-    if (isFav !== false) {
-        btn.classList.toggle('active', isFav);
-        btn.textContent = isFav ? 'У обраному' : 'Додати до обраного';
-        btn.style.borderColor = isFav ? 'var(--danger-color)' : 'var(--border-color)';
+
+    // 2. Оновлюємо вигляд кнопки
+    if (isFav) {
+        // Якщо книгу додано
+        btn.textContent = 'У обраному';
+        btn.classList.add('active');
+        btn.style.borderColor = 'var(--danger-color)'; // Явно задаємо колір бордера
+    } else {
+        // Якщо книгу видалено
+        btn.textContent = 'Додати до обраного';
+        btn.classList.remove('active');
+        btn.style.borderColor = 'var(--border-color)'; // Повертаємо стандартний колір
     }
+
+    // 3. Додаємо ефект "кліку" (пульсація), замість зникнення сторінки
+    btn.classList.add('btn-anim');
+    setTimeout(() => {
+        btn.classList.remove('btn-anim');
+    }, 300);
 };
 
 // Профіль: рендеринг сітки обраних книг
