@@ -1,3 +1,14 @@
+/* 1. Робимо прокрутку плавною для всієї сторінки */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 2. Додаємо відступ зверху для секції книг, 
+   щоб заголовок не ховався під фіксованою шапкою після прокрутки */
+#books-section {
+    scroll-margin-top: 100px; /* 70px (висота хедера) + 30px (повітря) */
+}
+
 /* Змінні та теми: визначення кольорів та переходів для темної та світлої теми */
 :root {
     --bg-body: #0f0f10;
@@ -607,4 +618,67 @@ body {
 
 .btn-anim {
     animation: button-pop 0.3s ease-out;
+}
+
+/* ============================================================
+   АДАПТИВ ДЛЯ СТОРІНКИ book.html (Деталі книги)
+   ============================================================ */
+
+@media (max-width: 850px) {
+    .book-detail-wrapper {
+        /* Перетворюємо сітку на вертикальний стек */
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center; /* Центруємо заголовки та текст */
+    }
+
+    .cover-container {
+        position: static; /* Прибираємо sticky, щоб обкладинка не "плавала" */
+        display: flex;
+        justify-content: center;
+    }
+
+    .cover-wrapper {
+        max-width: 260px; /* Обмежуємо ширину картинки на мобільних */
+        width: 100%;
+        margin: 0 auto;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3); /* Додаємо об'єму */
+    }
+
+    .meta-row {
+        justify-content: center; /* Центруємо автора, рейтинг і рік */
+    }
+
+    .action-row {
+        flex-direction: column; /* Кнопки одна під одною */
+        gap: 12px;
+        align-items: center;
+    }
+
+    .action-row .btn {
+        width: 100%; /* Кнопки на всю ширину контейнера */
+        max-width: 320px;
+        padding: 14px; /* Робимо їх трохи більшими для зручності */
+    }
+
+    #fav-detail-btn {
+        min-width: unset; /* Скидаємо фіксовану ширину */
+    }
+}
+
+/* Для зовсім маленьких екранів (телефони) */
+@media (max-width: 480px) {
+    .book-detail {
+        padding: 20px 10px;
+    }
+
+    .detail-info h1 {
+        font-size: 24px; /* Зменшуємо заголовок, щоб не розривав екран */
+    }
+
+    .detail-desc {
+        text-align: left; /* Опис краще читати з вирівнюванням по лівому краю */
+        font-size: 15px;
+        line-height: 1.6;
+    }
 }
