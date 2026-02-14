@@ -11,7 +11,7 @@ BookStream — це веб-додаток для читання книг. Він
 
 Переглядати деталі книг.
 
-Проект створено для демонстрації роботи з JavaScript, HTML та CSS у рамках практики в KeepSolid. Основні файли знаходяться в папці BookStream/.
+Проект створено для демонстрації роботи з JavaScript, HTML та CSS у рамках практики в KeepSolid.
 # Установка
 
 Клонуйте репозиторій: git clone https://github.com/YTfayqq/KeepSolid_Pracrice2.git
