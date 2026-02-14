@@ -16,7 +16,7 @@ BookStream — це веб-додаток для читання книг. Він
 
 Клонуйте репозиторій: git clone https://github.com/YTfayqq/KeepSolid_Pracrice2.git
 
-Перейдіть до директорії: cd KeepSolid_Pracrice2/BookStream
+Перейдіть до директорії: cd KeepSolid_Pracrice2
 
 Відкрийте index.html у браузері.
 
