@@ -290,7 +290,7 @@ window.toggleFavDetail = function(btn, bookId) {
         btn.style.borderColor = 'var(--border-color)'; // Повертаємо стандартний колір
     }
 
-    // 3. Додаємо ефект "кліку" (пульсація), замість зникнення сторінки
+    // 3. Додаємо ефект "кліку" (пульсація)
     btn.classList.add('btn-anim');
     setTimeout(() => {
         btn.classList.remove('btn-anim');
@@ -485,13 +485,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registerForm) {
         registerForm.addEventListener('submit', e => {
             e.preventDefault();
-            const name = document.getElementById('name').value;
+
+            // Отримуємо ім'я та відрізаємо зайві пробіли по краях
+            const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+
+            // Перевірка на кількість символів
+            if (name.length < 2 || name.length > 20) {
+                alert("Ім'я повинно містити від 2 до 20 символів!");
+                return; // Зупиняємо виконання, якщо дані не підходять
+            }
+
+            // Якщо все добре - реєструємо
             if (register(name, email, password)) {
                 location.href = 'profile.html';
             } else {
-                alert('Email вже існує');
+            alert('Користувач з таким Email вже існує');
             }
         });
     }
